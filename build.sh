@@ -6,6 +6,10 @@ git submodule init
 git submodule sync
 git submodule update
 
+# Start ssh-agent and add your key
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+
 # local.conf won't exist until this step on first execution
 source poky/oe-init-build-env
 
