@@ -6,7 +6,7 @@ inherit update-rc.d
 
 # TODO: Set this  with the path to your assignments rep.  Use ssh protocol and see lecture notes
 # about how to setup ssh-agent for passwordless access
-SRC_URI = "git://github.com/cu-ecen-aeld/assignments-3-and-later-MarkoHammersen.git;protocol=ssh;branch=main"
+SRC_URI = "git@github.com:cu-ecen-aeld/assignments-3-and-later-MarkoHammersen.git;protocol=ssh;branch=main"
 
 
 PV = "1.0+git${SRCPV}"
