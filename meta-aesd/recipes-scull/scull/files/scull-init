@@ -18,7 +18,7 @@ function scull_start(){
 	# invoke insmod with all arguments we got
 	# and use a pathname, as insmod doesn't look in . by default
 	#insmod $module.ko $* || exit 1
-	insmod /lib/modules/$(uname -r)/extra/"$module".ko $* || exit 1
+	insmod ./$module.ko $* || exit 1
 
 	# retrieve major number
 	major=$(awk "\$2==\"$module\" {print \$1}" /proc/devices)
@@ -84,11 +84,13 @@ function scull_stop(){
 
 case "$1" in
 	start)
-    		echo "Loading kernel module ldd scull..."
+   		echo "Loading kernel module ldd scull..."
+		cd /lib/modules/$(uname -r)/extra
 		scull_start
 		;;
 	stop)
 		echo "Unloading ldd kernel module ldd scull..."
+		cd /lib/modules/$(uname -r)/extra
 		scull_stop
 		;;
 	*)

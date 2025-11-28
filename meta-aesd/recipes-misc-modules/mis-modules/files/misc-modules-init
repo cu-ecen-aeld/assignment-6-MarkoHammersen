@@ -28,7 +28,7 @@ function misc_modules_start(){
 	fi
 
 	echo "Load our module, exit on failure"
-	insmod /lib/modules/$(uname -r)/extra/"$module".ko || exit 1
+	insmod ./$module.ko || exit 1
 
 	echo "Get the major number (allocated with allocate_chrdev_region) from /proc/devices"
 	major=$(awk "\$2==\"$module\" {print \$1}" /proc/devices)
@@ -68,12 +68,16 @@ function misc_modules_stop(){
 
 case "$1" in
 	start)
-    		echo "Loading kernel module ldd scull..."
+    	echo "Loading kernel module ldd faulty..."
+		cd /lib/modules/$(uname -r)/extra
 		misc_modules_start faulty
+		modprobe hello
 		;;
 	stop)
-		echo "Unloading ldd kernel module ldd scull..."
+		echo "Unloading ldd kernel module ldd faulty..."
+		cd /lib/modules/$(uname -r)/extra
 		misc_modules_stop faulty
+		rmmod hello
 		;;
 	*)
 	echo "Usage: $0 {start|stop}"
